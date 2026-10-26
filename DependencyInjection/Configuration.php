@@ -17,12 +17,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('enabled')
-                    ->defaultValue('true')
-                ->end()
-            ->end()
-        ;
-
+                ->booleanNode('enabled')->defaultTrue()->end()
+            ->end();
+            
         return $treeBuilder;
     }
 }

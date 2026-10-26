@@ -7,17 +7,19 @@ use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Nicosomb\WallabagWebarchiveBundle\Helper\Webarchive;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Doctrine\ORM\EntityManager;
+//use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class WebarchiveSubscriber implements EventSubscriberInterface
 {
     private $em;
     private $logger;
-    private $wearchive;
+    private $webarchive;
     private $contentProxy;
     private $enabled;
 
-    public function __construct(EntityManager $em, $enabled, Webarchive $webarchive, ContentProxy $contentProxy, LoggerInterface $logger)
+    //public function __construct(EntityManager $em, $enabled, Webarchive $webarchive, ContentProxy $contentProxy, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $em, $enabled, Webarchive $webarchive, ContentProxy $contentProxy, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->webarchive = $webarchive;

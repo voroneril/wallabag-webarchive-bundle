@@ -25,10 +25,13 @@ class Webarchive
      */
     public function getArchiveUrl($url)
     {
-        $response = $this->client->get('https://archive.org/wayback/available?url='.$url);
+        $response = $this->client->get('https://archive.org/wayback/available?url='.urlencode($url));
         $body = $response->getBody();
         $content = json_decode($body->getContents());
-
+        
+        if (!isset($content->archived_snapshots)) 
+            return false;
+        
         $snapshots = $content->{'archived_snapshots'};
         if (false == isset($snapshots->{'closest'})) {
             $this->logger->debug('WebArchive: no snapshot');
